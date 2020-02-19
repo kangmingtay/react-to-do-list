@@ -1,24 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import './App.css'
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
+import { Typography } from '@material-ui/core';
 
-function App() {
+
+const App = () => {
+
+  // argument instead useState stores the initial state 
+  const [todos, setTodos] = useState([]);
+  console.log(todos)
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Typography component="h1" variant="h2">
+        Todos
+      </Typography>
+      <TodoForm saveTodo={(todoText) => {
+        setTodos([...todos, todoText])
+      }}/>
+      <TodoList todos={ todos } deleteTodo={(index) => {
+          setTodos(todos.filter((_, i) => i != index));
+        }}/>
     </div>
   );
 }
