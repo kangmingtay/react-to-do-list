@@ -10,6 +10,9 @@ const TodoForm = (props) => {
         <form onSubmit={(event) => {
             event.preventDefault();
             props.saveTodo(value);
+
+            // clear input here
+            setValue('');
         }}>  
             <TextField 
                 variant="outlined" 
@@ -17,8 +20,8 @@ const TodoForm = (props) => {
                 margin="normal"
                 onChange={(event) => {
                     setValue(event.target.value);
-                }}
-                value={value} 
+                }} 
+                value={value}
             />
         </form>
     );
