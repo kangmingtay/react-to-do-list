@@ -10,7 +10,7 @@ const App = () => {
 
   // argument instead useState stores the initial state 
   const [todos, setTodos] = useState([]);
-  console.log(todos)
+  console.log("List of todos: ", todos)
   
   return (
     <div className="App">
@@ -21,7 +21,8 @@ const App = () => {
         setTodos([...todos, todoText])
       }}/>
       <TodoList todos={ todos } deleteTodo={(index) => {
-          setTodos(todos.filter((_, i) => i != index));
+          const newTodos = todos.filter((_, i) => i !== index)
+          setTodos(newTodos);
         }}/>
     </div>
   );

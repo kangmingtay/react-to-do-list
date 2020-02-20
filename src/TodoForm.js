@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField'
 
 const TodoForm = (props) => {
     const [value, setValue] = useState('');
-    console.log(value)
     return (
         // saves value to props passed down 
         <form onSubmit={(event) => {
