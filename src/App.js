@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './App.css'
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
-import { Typography } from '@material-ui/core';
+import { Typography, Container } from '@material-ui/core';
 
 
 const App = () => {
 
   // argument instead useState stores the initial state 
   const [todos, setTodos] = useState([]);
-  console.log("List of todos: ", todos)
+  const [numTodos, setNum] = useState(todos.length);
+  // console.log("List of todos: ", todos, numTodos, todos.length)
+
+  useEffect(() => {
+    let count = todos.length
+    for(let i = 0; i < todos.length; i++) {
+      if(todos[i][1]) {
+        count--
+      } 
+      
+    } 
+    setNum(count)
+  }, [todos])
   
   return (
     <div className="App">
@@ -18,12 +30,19 @@ const App = () => {
         Todos
       </Typography>
       <TodoForm saveTodo={(todoText) => {
-        setTodos([...todos, todoText])
+        let todoStatus = false // marks todo as not done yet
+        let todoUpdateField = false
+        let todo = [todoText, todoStatus, todoUpdateField]
+        setTodos([...todos, todo])
       }}/>
-      <TodoList todos={ todos } deleteTodo={(index) => {
+      <Container>You have { numTodos } todos left to complete.</Container>
+      <TodoList 
+        todos={ todos } 
+        deleteTodo={(index) => {
           const newTodos = todos.filter((_, i) => i !== index)
           setTodos(newTodos);
-        }}/>
+        }}
+      />
     </div>
   );
 }
