@@ -1,7 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
 import List from '@material-ui/core/List';
-import { ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@material-ui/core';
+import { ListItem, ListItemText, ListItemSecondaryAction, IconButton, Checkbox, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const TodoList = ({ todos, deleteTodo }) => {
@@ -9,7 +8,12 @@ const TodoList = ({ todos, deleteTodo }) => {
         <List>
             {todos.map((todo, index) => (
                 <ListItem key={index.toString()} dense button>
-                    <ListItemText> { todo } </ListItemText>
+                    <Checkbox onChange={() => todo[1] = !todo[1]}/>
+                    <ListItemText>
+                        <Typography align='center'>
+                            { todo[0] }
+                        </Typography>
+                    </ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton
                             aria-label="Delete"
